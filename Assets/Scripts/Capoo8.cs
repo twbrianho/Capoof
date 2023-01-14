@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Capoo5 : CapooBase
+public class Capoo8 : CapooBase
 {
-    public Capoo5 ()
+    public Capoo8 ()
     {
-        capooTag = "Capoo5";
-        nextCapooTag = "Capoo6";
+        capooTag = "Capoo8";
+        nextCapooTag = "Capoo1";
     }
 
     // Start is called before the first frame update
