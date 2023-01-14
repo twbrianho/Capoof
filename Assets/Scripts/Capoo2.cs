@@ -7,8 +7,7 @@ public class Capoo2 : CapooBase
     // Start is called before the first frame update
     void Start()
     {
-        baseScore = 200;
-        mergeScore = 300;
+        mergeScore = 200;
         capooTag = "Capoo2";
         nextCapooTag = "Capoo3";
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DeathZone : MonoBehaviour
 {
-    public float DEATH_DELAY = 3.0f;
+    public float DEATH_DELAY = 4.0f;
     
     public GameManager gameManager;
     public HashSet<GameObject> capoosInside = new HashSet<GameObject>(); // Array of Capoos currently inside the DeathZone
@@ -36,14 +36,7 @@ public class DeathZone : MonoBehaviour
     // If any Capoos collide with the DeathZone, log a message
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Capoo1") ||
-            other.gameObject.CompareTag("Capoo2") ||
-            other.gameObject.CompareTag("Capoo3") ||
-            other.gameObject.CompareTag("Capoo4") ||
-            other.gameObject.CompareTag("Capoo5") ||
-            other.gameObject.CompareTag("Capoo6") ||
-            other.gameObject.CompareTag("Capoo7") ||
-            other.gameObject.CompareTag("Capoo8"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Capoos"))
         {
             capoosInside.Add(other.gameObject);
         }
@@ -52,14 +45,7 @@ public class DeathZone : MonoBehaviour
     // If any Capoos leave the DeathZone, log a message
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Capoo1") ||
-            other.gameObject.CompareTag("Capoo2") ||
-            other.gameObject.CompareTag("Capoo3") ||
-            other.gameObject.CompareTag("Capoo4") ||
-            other.gameObject.CompareTag("Capoo5") ||
-            other.gameObject.CompareTag("Capoo6") ||
-            other.gameObject.CompareTag("Capoo7") ||
-            other.gameObject.CompareTag("Capoo8"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Capoos"))
         {
             capoosInside.Remove(other.gameObject);
         }

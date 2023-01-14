@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6404726557836947351}
   - component: {fileID: 7657291343587572081}
   - component: {fileID: 8163691583833407250}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Capoo1Prefab
   m_TagString: Capoo1
   m_Icon: {fileID: 0}
@@ -167,4 +167,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aa71244f5ac6440ea5bbdf8db85df80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFirstCapoo: 0
+  gameManager: {fileID: 0}
+  isCollisionHandler: 0
+  baseScore: 0
+  mergeScore: 0
+  capooTag: 
+  nextCapooTag: 

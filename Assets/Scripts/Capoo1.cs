@@ -7,7 +7,6 @@ public class Capoo1 : CapooBase
     // Start is called before the first frame update
     void Start()
     {
-        baseScore = 100;
         mergeScore = 100;
         capooTag = "Capoo1";
         nextCapooTag = "Capoo2";

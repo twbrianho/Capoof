@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public float RESPAWN_DELAY = 0.8f;
+    public float RESPAWN_DELAY = 1.0f;
 
     public DeathZone deathZone;
     public Text scoreText;
@@ -26,6 +26,36 @@ public class GameManager : MonoBehaviour
     public void addScore(int points) {
         score += points;
         scoreText.text = score.ToString();
+    }
+
+    private GameObject getRandomCapoo() {
+        // Based on the current score, get a random Capoo
+        int upperRange;
+        if (score <= 500) {
+            upperRange = 1;
+        }
+        else if (score <= 1000) {
+            upperRange = 2;
+        }
+        else if (score <= 5000) {
+            upperRange = 3;
+        }
+        else {
+            upperRange = 4;
+        }
+        int randomCapoo = Random.Range(0, upperRange);
+        if (randomCapoo == 0) {
+            return Capoo1;
+        }
+        else if (randomCapoo == 1) {
+            return Capoo2;
+        }
+        else if (randomCapoo == 2) {
+            return Capoo3;
+        }
+        else {
+            return Capoo4;
+        }
     }
     
     // Start is called before the first frame update
@@ -66,12 +96,8 @@ public class GameManager : MonoBehaviour
         // If there is no currentCapoo, spawn a new random Capoo and set it as currentCapoo.
         // If there are still Capoos in the death zone, don't spawn a new Capoo! This could cause a Capoo explosion.
         if (currentCapoo == null && deathZone.capoosInside.Count == 0) {
-            // Spawn a random Capoo between Capoo1 and Capoo3
-            if (Random.Range(0, 2) == 0) {
-                currentCapoo = Instantiate(Capoo1, new Vector3(validStartX, 4, 0), Quaternion.identity);
-            } else {
-                currentCapoo = Instantiate(Capoo2, new Vector3(validStartX, 4, 0), Quaternion.identity);
-            }
+            // Spawn a random Capoo based on the score
+            currentCapoo = Instantiate(getRandomCapoo(), new Vector3(validStartX, 4, 0), Quaternion.identity);
             // Turn gravity off for currentCapoo
             currentCapoo.GetComponent<Rigidbody2D>().gravityScale = 0;
         }
