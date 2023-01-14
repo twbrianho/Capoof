@@ -4,16 +4,20 @@ using UnityEngine;
 
 public abstract class CapooBase : MonoBehaviour
 {
+    public GameManager gameManager;
+    
     // For resolving collisions between 2 Capoos only once
     public bool isCollisionHandler = false;
 
+    public int baseScore; // The score to be awarded when this Capoo is dropped.
+    public int mergeScore; // The score to be awarded when this Capoo is merged with another Capoo.
     public string capooTag; // For identifying other Capoos with the same tag
     public string nextCapooTag; // The capoo to be created when this one collides with another
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -34,6 +38,8 @@ public abstract class CapooBase : MonoBehaviour
             newCapoo.GetComponent<Rigidbody2D>().velocity = (GetComponent<Rigidbody2D>().velocity + collision.gameObject.GetComponent<Rigidbody2D>().velocity) / 2;
             Destroy(gameObject);
             Destroy(collision.gameObject);
+            // Award the player the merge score
+            gameManager.addScore(mergeScore);
         }
     }
 }

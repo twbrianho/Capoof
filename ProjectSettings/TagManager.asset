@@ -12,6 +12,8 @@ TagManager:
   - Capoo6
   - Capoo7
   - Capoo8
+  - GameManager
+  - DeathZone
   layers:
   - Default
   - TransparentFX

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DeathZone : MonoBehaviour
 {
-    public float DEATH_DELAY = 2.0f;
+    public float DEATH_DELAY = 3.0f;
     
     public GameManager gameManager;
     public HashSet<GameObject> capoosInside = new HashSet<GameObject>(); // Array of Capoos currently inside the DeathZone
@@ -13,13 +13,12 @@ public class DeathZone : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
         // Note: need to consider whether the capoo currently inside is the currentCapoo!
         if (capoosInside.Count == 0 || (capoosInside.Count == 1 && gameManager.currentCapoo && capoosInside.Contains(gameManager.currentCapoo)))
         {
@@ -46,7 +45,6 @@ public class DeathZone : MonoBehaviour
             other.gameObject.CompareTag("Capoo7") ||
             other.gameObject.CompareTag("Capoo8"))
         {
-            Debug.Log("Capoo entered DeathZone");
             capoosInside.Add(other.gameObject);
         }
     }
@@ -63,7 +61,6 @@ public class DeathZone : MonoBehaviour
             other.gameObject.CompareTag("Capoo7") ||
             other.gameObject.CompareTag("Capoo8"))
         {
-            Debug.Log("Capoo left DeathZone");
             capoosInside.Remove(other.gameObject);
         }
     }

@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class Capoo7 : CapooBase
 {
-    public Capoo7 ()
-    {
-        capooTag = "Capoo7";
-        nextCapooTag = "Capoo8";
-    }
-
     // Start is called before the first frame update
     void Start()
     {
-        
+        baseScore = 2100;
+        mergeScore = 3400;
+        capooTag = "Capoo7";
+        nextCapooTag = "Capoo8";
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
