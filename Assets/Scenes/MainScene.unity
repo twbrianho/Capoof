@@ -377,7 +377,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1141526450}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: restartGame
+        m_MethodName: RestartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1239,6 +1239,12 @@ MonoBehaviour:
   wah1Sound: {fileID: 8300000, guid: 588dbab4136204da09dc64440d368fa6, type: 3}
   wah2Sound: {fileID: 8300000, guid: 2719f4bc2d9fd4ae6aa14627b29a9f59, type: 3}
   wah3Sound: {fileID: 8300000, guid: 2dd177e07978d4d089487f35242f52ae, type: 3}
+  wah4Sound: {fileID: 8300000, guid: db28388f89aed47f193b0533e0b67cfe, type: 3}
+  wah5Sound: {fileID: 8300000, guid: d338587d4c24044fda0f2ad20f1eb37f, type: 3}
+  wah6Sound: {fileID: 8300000, guid: cbf5dbb2021d04e1aa63bad8d12bb147, type: 3}
+  wah7Sound: {fileID: 8300000, guid: ab316ed70776e48cc88efbf0c2098a9e, type: 3}
+  wah8Sound: {fileID: 8300000, guid: c423d817cdb5441faad54930f856acaf, type: 3}
+  wah9Sound: {fileID: 8300000, guid: 9601b134baa614335b39f8946af899ff, type: 3}
 --- !u!4 &873695524
 Transform:
   m_ObjectHideFlags: 0
