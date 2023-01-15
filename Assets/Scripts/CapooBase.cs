@@ -14,6 +14,9 @@ public abstract class CapooBase : MonoBehaviour
     public string capooTag; // For identifying other Capoos with the same tag
     public string nextCapooTag; // The capoo to be created when this one collides with another
 
+    [SerializeField] public AudioSource wahSfx;
+    [SerializeField] public AudioSource popSfx;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +39,8 @@ public abstract class CapooBase : MonoBehaviour
             GameObject newCapoo = Instantiate(GameObject.FindWithTag(nextCapooTag), (transform.position + collision.gameObject.transform.position) / 2, Quaternion.identity);
             // Give the new Capoo the average velocity of the two original Capoos
             newCapoo.GetComponent<Rigidbody2D>().velocity = (GetComponent<Rigidbody2D>().velocity + collision.gameObject.GetComponent<Rigidbody2D>().velocity) / 2;
+            // TODO: Play pop sound effect
+            // Destroy the two original Capoos
             Destroy(gameObject);
             Destroy(collision.gameObject);
             // Award the player the merge score

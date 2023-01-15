@@ -27,8 +27,7 @@ public class DeathZone : MonoBehaviour
         else {
             capoosInsideElapsedTime += Time.deltaTime;
             if (capoosInsideElapsedTime >= DEATH_DELAY) {
-                Debug.Log("GAME OVER");
-                // TODO: Game Over State
+                gameManager.gameOver();
             }
         }
     }

@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public float RESPAWN_DELAY = 1.0f;
 
     public DeathZone deathZone;
+    public GameObject gameOverScreen;
     public Text scoreText;
 
     GameObject Capoo1;
@@ -19,9 +21,10 @@ public class GameManager : MonoBehaviour
     GameObject Capoo7;
     GameObject Capoo8;
 
-    public int score = 0;
+    public int score;
     public GameObject currentCapoo;
-    private float respawnCountdown = 0.0f;
+    private bool gameIsOver;
+    private float respawnCountdown;
 
     public void addScore(int points) {
         score += points;
@@ -57,11 +60,27 @@ public class GameManager : MonoBehaviour
             return Capoo4;
         }
     }
+
+    public void gameOver()
+    {
+        gameIsOver = true;
+        gameOverScreen.SetActive(true);
+    }
+
+    public void restartGame() 
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
     
     // Start is called before the first frame update
     void Start()
     {
+        // Initialize variables
+        score = 0;
+        respawnCountdown = 0;
+
         deathZone = GameObject.FindGameObjectWithTag("DeathZone").GetComponent<DeathZone>();
+        scoreText.text = score.ToString();
 
         Capoo1 = GameObject.FindWithTag("Capoo1");
         Capoo2 = GameObject.FindWithTag("Capoo2");
@@ -81,6 +100,9 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {        
+        // Prevent game from continuing if game is over
+        if (gameIsOver) { return; }
+        
         // Count down the respawn timer
         if (respawnCountdown > 0 && currentCapoo == null) {
             respawnCountdown -= Time.deltaTime;
@@ -114,6 +136,8 @@ public class GameManager : MonoBehaviour
             if (Input.GetMouseButtonUp(0)) {
                 // Turn gravity back on for currentCapoo
                 currentCapoo.GetComponent<Rigidbody2D>().gravityScale = 1;
+                // TODO: Play wah sound effect
+                
                 // Start a timer to spawn a new Capoo at 0.5 seconds
                 respawnCountdown = RESPAWN_DELAY;
                 currentCapoo = null;
