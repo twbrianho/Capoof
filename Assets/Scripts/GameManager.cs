@@ -4,10 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(AudioSource))]
 public class GameManager : MonoBehaviour
 {
     public float RESPAWN_DELAY = 1.0f;
 
+    public SoundEffectManager soundEffectManager;
     public DeathZone deathZone;
     public GameObject gameOverScreen;
     public Text scoreText;
@@ -26,12 +28,12 @@ public class GameManager : MonoBehaviour
     private bool gameIsOver;
     private float respawnCountdown;
 
-    public void addScore(int points) {
+    public void AddScore(int points) {
         score += points;
         scoreText.text = score.ToString();
     }
 
-    private GameObject getRandomCapoo() {
+    private GameObject GetRandomCapoo() {
         // Based on the current score, get a random Capoo
         int upperRange;
         if (score <= 500) {
@@ -61,13 +63,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void gameOver()
+    public void GameOver()
     {
         gameIsOver = true;
         gameOverScreen.SetActive(true);
     }
 
-    public void restartGame() 
+    public void RestartGame() 
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -79,6 +81,7 @@ public class GameManager : MonoBehaviour
         score = 0;
         respawnCountdown = 0;
 
+        soundEffectManager = GameObject.FindGameObjectWithTag("SoundEffectManager").GetComponent<SoundEffectManager>();
         deathZone = GameObject.FindGameObjectWithTag("DeathZone").GetComponent<DeathZone>();
         scoreText.text = score.ToString();
 
@@ -119,7 +122,7 @@ public class GameManager : MonoBehaviour
         // If there are still Capoos in the death zone, don't spawn a new Capoo! This could cause a Capoo explosion.
         if (currentCapoo == null && deathZone.capoosInside.Count == 0) {
             // Spawn a random Capoo based on the score
-            currentCapoo = Instantiate(getRandomCapoo(), new Vector3(validStartX, 4, 0), Quaternion.identity);
+            currentCapoo = Instantiate(GetRandomCapoo(), new Vector3(validStartX, 4, 0), Quaternion.identity);
             // Turn gravity off for currentCapoo
             currentCapoo.GetComponent<Rigidbody2D>().gravityScale = 0;
         }
@@ -136,8 +139,8 @@ public class GameManager : MonoBehaviour
             if (Input.GetMouseButtonUp(0)) {
                 // Turn gravity back on for currentCapoo
                 currentCapoo.GetComponent<Rigidbody2D>().gravityScale = 1;
-                // TODO: Play wah sound effect
-                
+                // Play the Capoo launch sound effect
+                soundEffectManager.PlayCapooLaunchSound();
                 // Start a timer to spawn a new Capoo at 0.5 seconds
                 respawnCountdown = RESPAWN_DELAY;
                 currentCapoo = null;

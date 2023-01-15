@@ -11,6 +11,7 @@ public class Capoo6 : CapooBase
         capooTag = "Capoo6";
         nextCapooTag = "Capoo7";       
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        soundEffectManager = GameObject.FindGameObjectWithTag("SoundEffectManager").GetComponent<SoundEffectManager>();
     }
 
     // Update is called once per frame

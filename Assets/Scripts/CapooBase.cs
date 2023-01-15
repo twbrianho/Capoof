@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class CapooBase : MonoBehaviour
+public class CapooBase : MonoBehaviour
 {
     public GameManager gameManager;
     
@@ -14,20 +14,7 @@ public abstract class CapooBase : MonoBehaviour
     public string capooTag; // For identifying other Capoos with the same tag
     public string nextCapooTag; // The capoo to be created when this one collides with another
 
-    [SerializeField] public AudioSource wahSfx;
-    [SerializeField] public AudioSource popSfx;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public SoundEffectManager soundEffectManager;
 
     // If collide with another Capoo of the same size, destroy both and create a new Capoo of a larger size at the point between them
     private void OnCollisionEnter2D(Collision2D collision)
@@ -39,12 +26,13 @@ public abstract class CapooBase : MonoBehaviour
             GameObject newCapoo = Instantiate(GameObject.FindWithTag(nextCapooTag), (transform.position + collision.gameObject.transform.position) / 2, Quaternion.identity);
             // Give the new Capoo the average velocity of the two original Capoos
             newCapoo.GetComponent<Rigidbody2D>().velocity = (GetComponent<Rigidbody2D>().velocity + collision.gameObject.GetComponent<Rigidbody2D>().velocity) / 2;
-            // TODO: Play pop sound effect
+            // Play the merge sound effect
+            soundEffectManager.PlayCapooMergeSound();
             // Destroy the two original Capoos
             Destroy(gameObject);
             Destroy(collision.gameObject);
             // Award the player the merge score
-            gameManager.addScore(mergeScore);
+            gameManager.AddScore(mergeScore);
         }
     }
 }

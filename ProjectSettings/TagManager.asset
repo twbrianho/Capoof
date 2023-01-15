@@ -14,6 +14,7 @@ TagManager:
   - Capoo8
   - GameManager
   - DeathZone
+  - SoundEffectManager
   layers:
   - Default
   - TransparentFX
