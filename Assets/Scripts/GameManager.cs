@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(AudioSource))]
 public class GameManager : MonoBehaviour
 {
     public float RESPAWN_DELAY = 1.0f;
@@ -29,6 +28,10 @@ public class GameManager : MonoBehaviour
     private float respawnCountdown;
 
     public void AddScore(int points) {
+        if (gameIsOver) {
+            // Don't add score if game is over
+            return;
+        }
         score += points;
         scoreText.text = score.ToString();
     }
@@ -67,6 +70,10 @@ public class GameManager : MonoBehaviour
     {
         gameIsOver = true;
         gameOverScreen.SetActive(true);
+        // Destroy current Capoo if there is still one hanging there
+        if (currentCapoo != null) {
+            Destroy(currentCapoo);
+        }
     }
 
     public void RestartGame() 

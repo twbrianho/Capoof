@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DeathZone : MonoBehaviour
 {
-    public float DEATH_DELAY = 4.0f;
+    public float DEATH_DELAY = 5.0f;
     
     public GameManager gameManager;
     public HashSet<GameObject> capoosInside = new HashSet<GameObject>(); // Array of Capoos currently inside the DeathZone

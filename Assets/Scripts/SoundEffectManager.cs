@@ -1,30 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
 public class SoundEffectManager : MonoBehaviour
 {
-    public AudioSource audioSource;
+    public float MAX_VOLUME = 1.0f;
 
-    public AudioClip pop1Sound;
-    public AudioClip pop2Sound;
-    public AudioClip pop3Sound;
+    [SerializeField] public Slider sfxSlider;
 
-    public AudioClip wah1Sound;
-    public AudioClip wah2Sound;
-    public AudioClip wah3Sound;
-    public AudioClip wah4Sound;
-    public AudioClip wah5Sound;
-    public AudioClip wah6Sound;
-    public AudioClip wah7Sound;
-    public AudioClip wah8Sound;
-    public AudioClip wah9Sound;
+    public AudioSource sfxSource;
+    [SerializeField] public AudioClip[] popClips;
+    [SerializeField] public AudioClip[] wahClips;
 
     // Start is called before the first frame update
     void Start()
     {
+        sfxSource = GetComponent<AudioSource>();
         
+        // Load the volume from the previous session
+        if (PlayerPrefs.HasKey("SfxVolume"))
+        {
+            LoadVolume();
+        }
+        else
+        {
+            SetVolume();
+        }
     }
 
     // Update is called once per frame
@@ -35,51 +38,30 @@ public class SoundEffectManager : MonoBehaviour
 
     public void PlayCapooLaunchSound()
     {
-        int randomSound = Random.Range(1, 10);
-        switch (randomSound) {
-            case 1:
-                audioSource.PlayOneShot(wah1Sound);
-                break;
-            case 2:
-                audioSource.PlayOneShot(wah2Sound);
-                break;
-            case 3:
-                audioSource.PlayOneShot(wah3Sound);
-                break;
-            case 4:
-                audioSource.PlayOneShot(wah4Sound);
-                break;
-            case 5:
-                audioSource.PlayOneShot(wah5Sound);
-                break;
-            case 6:
-                audioSource.PlayOneShot(wah6Sound);
-                break;
-            case 7:
-                audioSource.PlayOneShot(wah7Sound);
-                break;
-            case 8:
-                audioSource.PlayOneShot(wah8Sound);
-                break;
-            case 9:
-                audioSource.PlayOneShot(wah9Sound);
-                break;
-        }
+        // Play a random wah clip
+        sfxSource.PlayOneShot(wahClips[Random.Range(0, wahClips.Length)]);
     }
 
     public void PlayCapooMergeSound()
     {
-        int randomSound = Random.Range(1, 4);
-        switch (randomSound) {
-            case 1:
-                audioSource.PlayOneShot(pop1Sound);
-                break;
-            case 2:
-                audioSource.PlayOneShot(pop2Sound);
-                break;
-            case 3:
-                audioSource.PlayOneShot(pop3Sound);
-                break;
-        }
+        // Play a random pop clip
+        sfxSource.PlayOneShot(popClips[Random.Range(0, popClips.Length)]);
+    }
+
+    public void SetVolume()
+    {
+        sfxSource.volume = sfxSlider.value * MAX_VOLUME;
+        SaveVolume();
+    }
+
+    private void SaveVolume()
+    {
+        PlayerPrefs.SetFloat("SfxVolume", sfxSource.volume);
+    }
+
+    private void LoadVolume()
+    {
+        sfxSource.volume = PlayerPrefs.GetFloat("SfxVolume");
+        sfxSlider.value = sfxSource.volume / MAX_VOLUME;
     }
 }
