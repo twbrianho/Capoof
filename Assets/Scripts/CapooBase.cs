@@ -13,12 +13,25 @@ public class CapooBase : MonoBehaviour
     public int mergeScore; // The score to be awarded when this Capoo is merged with another Capoo.
     public string capooTag; // For identifying other Capoos with the same tag
     public string nextCapooTag; // The capoo to be created when this one collides with another
+    private float mergeCooldown = 0.5f; // The time between when a Capoo is created and when it can be merged with another Capoo
 
     public SoundEffectManager soundEffectManager;
+
+    private void Update()
+    {
+        // If the merge cooldown is still active, reduce it by the time since the last frame
+        if (mergeCooldown > 0) {
+            mergeCooldown -= Time.deltaTime;
+        }
+    }
 
     // If collide with another Capoo of the same size, destroy both and create a new Capoo of a larger size at the point between them
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // If still in the merge cooldown, don't do anything
+        if (mergeCooldown > 0) {
+            return;
+        }
         // Only do this for the first Capoo this code is run on when a collision happens between 2 Capoos
         if (collision.gameObject.tag == capooTag && !collision.gameObject.GetComponent<CapooBase>().isCollisionHandler) {
             isCollisionHandler = true;

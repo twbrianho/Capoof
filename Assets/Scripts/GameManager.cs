@@ -39,13 +39,13 @@ public class GameManager : MonoBehaviour
     private GameObject GetRandomCapoo() {
         // Based on the current score, get a random Capoo
         int upperRange;
-        if (score <= 500) {
+        if (score <= 100) {
             upperRange = 1;
         }
-        else if (score <= 1000) {
+        else if (score <= 500) {
             upperRange = 2;
         }
-        else if (score <= 5000) {
+        else if (score <= 2500) {
             upperRange = 3;
         }
         else {

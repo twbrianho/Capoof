@@ -13,10 +13,4 @@ public class Capoo8 : CapooBase
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         soundEffectManager = GameObject.FindGameObjectWithTag("SoundEffectManager").GetComponent<SoundEffectManager>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
