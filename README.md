@@ -4,8 +4,9 @@ Secret game for Wayleen's birthday 🤫
 
 - Game coded in Unity
 - Assets drawn in Affinity Designer 2
-- Sound effects recorded and edited in Logic Pro X
+- Sound effects recorded and edited in Logic Pro
 - Music from Youtube Audio Library
+- Idea stolen from [Cats Are Cute](https://play.google.com/store/apps/details?id=com.game.kkiruk.catsarepop&hl=en_US&gl=US)
 
 # DISCLAIMER
 
