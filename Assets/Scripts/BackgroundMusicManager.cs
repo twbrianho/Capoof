@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class BackgroundMusicManager : MonoBehaviour
 {
-    public float MAX_VOLUME = 1.0f;
+    public float MAX_VOLUME = 0.7f;
 
     [SerializeField] public Slider bgmSlider;
 

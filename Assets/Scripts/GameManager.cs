@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
@@ -34,6 +35,10 @@ public class GameManager : MonoBehaviour
         }
         score += points;
         scoreText.text = score.ToString();
+    }
+
+    private bool IsMouseOverUI() {
+        return EventSystem.current.IsPointerOverGameObject();
     }
 
     private GameObject GetRandomCapoo() {
@@ -137,13 +142,12 @@ public class GameManager : MonoBehaviour
         if (currentCapoo) {
             // Set currentCapoo velocity towards mouse X position on screen
             // Use velocity instead of position so that it doesn't go through walls
-            currentCapoo.GetComponent<Rigidbody2D>().velocity = new Vector2(validStartX - currentCapoo.transform.position.x, 0) * 10;
+            currentCapoo.GetComponent<Rigidbody2D>().velocity = new Vector2(validStartX - currentCapoo.transform.position.x, 0) * 50;
 
             // Set currentCapoo's Y position to 4
             currentCapoo.transform.position = new Vector3(currentCapoo.transform.position.x, 4, 0);
 
-            // If mouse is clicked
-            if (Input.GetMouseButtonUp(0)) {
+            if (Input.GetMouseButtonUp(0) && !IsMouseOverUI()) {
                 // Turn gravity back on for currentCapoo
                 currentCapoo.GetComponent<Rigidbody2D>().gravityScale = 1;
                 // Play the Capoo launch sound effect
