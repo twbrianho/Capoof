@@ -8,6 +8,8 @@ public class CapooBase : MonoBehaviour
     
     // For resolving collisions between 2 Capoos only once
     public bool isCollisionHandler = false;
+    // Ensure each Capoo can be involved in only one collision (this resolves a bug when 3+ Capoos collide on the same frame)
+    public bool isInvolvedInCollision = false;
 
     public int baseScore; // The score to be awarded when this Capoo is dropped.
     public int mergeScore; // The score to be awarded when this Capoo is merged with another Capoo.
@@ -32,9 +34,16 @@ public class CapooBase : MonoBehaviour
         if (mergeCooldown > 0) {
             return;
         }
+        // If this Capoo has already been involved in a collision (i.e. the other Capoo is handling the collision), don't do anything
+        if (isInvolvedInCollision) {
+            return;
+        }
         // Only do this for the first Capoo this code is run on when a collision happens between 2 Capoos
         if (collision.gameObject.tag == capooTag && !collision.gameObject.GetComponent<CapooBase>().isCollisionHandler) {
+            // Set the collision handler flags
             isCollisionHandler = true;
+            isInvolvedInCollision = true;
+            collision.gameObject.GetComponent<CapooBase>().isInvolvedInCollision = true;
             // Instantiate a new Capoo at the point between the two original Capoos
             GameObject newCapoo = Instantiate(GameObject.FindWithTag(nextCapooTag), (transform.position + collision.gameObject.transform.position) / 2, Quaternion.identity);
             // Give the new Capoo the average velocity of the two original Capoos
