@@ -6,16 +6,21 @@ public class CapooBase : MonoBehaviour
 {
     public GameManager gameManager;
     
-    // Ensure each Capoo can be involved in only one collision
-    public bool isInvolvedInCollision = false;
-
-    public int baseScore; // The score to be awarded when this Capoo is dropped.
-    public int mergeScore; // The score to be awarded when this Capoo is merged with another Capoo.
-    public string capooTag; // For identifying other Capoos with the same tag
-    public string nextCapooTag; // The capoo to be created when this one collides with another
+    public bool isInvolvedInCollision = false; // Ensure each Capoo can be involved in only one collision
     private float mergeCooldown = 0.5f; // The time between when a Capoo is created and when it can be merged with another Capoo
 
+    public virtual int mergeScore { get; set; } // The score to be awarded when this Capoo is merged with another Capoo.
+    public virtual string capooTag { get; set; } // For identifying other Capoos with the same tag
+    public virtual string nextCapooTag { get; set; } // The capoo to be created when this one collides with another
+
     public SoundEffectManager soundEffectManager;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        soundEffectManager = GameObject.FindGameObjectWithTag("SoundEffectManager").GetComponent<SoundEffectManager>();
+    }
 
     private void Update()
     {
@@ -54,6 +59,5 @@ public class CapooBase : MonoBehaviour
         Destroy(collision.gameObject);
         // Award the player the merge score
         gameManager.AddScore(mergeScore);
-
     }
 }

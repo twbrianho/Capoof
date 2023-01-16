@@ -4,13 +4,7 @@ using UnityEngine;
 
 public class Capoo2 : CapooBase
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        mergeScore = 200;
-        capooTag = "Capoo2";
-        nextCapooTag = "Capoo3";
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        soundEffectManager = GameObject.FindGameObjectWithTag("SoundEffectManager").GetComponent<SoundEffectManager>();
-    }
+    public override int mergeScore { get => 200; }
+    public override string capooTag { get => "Capoo2"; }
+    public override string nextCapooTag { get => "Capoo3"; }
 }
