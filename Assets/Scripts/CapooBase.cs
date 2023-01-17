@@ -8,6 +8,7 @@ public class CapooBase : MonoBehaviour
     private float SCALE_RATE = 2.0f;  // Size increase per second
 
     public GameManager gameManager;
+    public SoundEffectManager soundEffectManager;
     
     public bool isInvolvedInCollision = false; // Ensure each Capoo can be involved in only one collision
     private float mergeCooldown = 0.5f; // The time between when a Capoo is created and when it can be merged with another Capoo
@@ -18,7 +19,6 @@ public class CapooBase : MonoBehaviour
     public virtual string capooTag { get; set; } // For identifying other Capoos with the same tag
     public virtual string nextCapooTag { get; set; } // The capoo to be created when this one collides with another
 
-    public SoundEffectManager soundEffectManager;
 
     // Start is called before the first frame update
     void Start()
@@ -63,8 +63,10 @@ public class CapooBase : MonoBehaviour
         // Set the collision handler flags
         isInvolvedInCollision = true;
         collision.gameObject.GetComponent<CapooBase>().isInvolvedInCollision = true;
+        // Calculate the middle point between the two Capoos
+        Vector3 middlePoint = (transform.position + collision.gameObject.transform.position) / 2;
         // Instantiate a new Capoo at the point between the two original Capoos
-        GameObject newCapoo = Instantiate(GameObject.FindWithTag(nextCapooTag), (transform.position + collision.gameObject.transform.position) / 2, Quaternion.identity);
+        GameObject newCapoo = Instantiate(GameObject.FindWithTag(nextCapooTag), middlePoint, Quaternion.identity);
         // Give the new Capoo the average velocity of the two original Capoos
         newCapoo.GetComponent<Rigidbody2D>().velocity = (GetComponent<Rigidbody2D>().velocity + collision.gameObject.GetComponent<Rigidbody2D>().velocity) / 2;
         // Play the merge sound effect
