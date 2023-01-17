@@ -2,6 +2,8 @@
 
 Secret game for Wayleen's birthday 🤫
 
+Play here: https://capoof.netlify.app/
+
 - Game coded in Unity
 - Assets drawn in Affinity Designer 2
 - Sound effects recorded and edited in Logic Pro
