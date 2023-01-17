@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class CapooBase : MonoBehaviour
 {
+    private float STARTING_SCALE = 0.0f;
+    private float SCALE_RATE = 2.0f;  // Size increase per second
+
     public GameManager gameManager;
     
     public bool isInvolvedInCollision = false; // Ensure each Capoo can be involved in only one collision
     private float mergeCooldown = 0.5f; // The time between when a Capoo is created and when it can be merged with another Capoo
+    private float growTimer = 0.0f; // Time elapsed since the Capoo was created
 
-    public virtual int mergeScore { get; set; } // The score to be awarded when this Capoo is merged with another Capoo.
+    public virtual float maxSize { get; set; } // The max size a Capoo should be
+    public virtual int mergeScore { get; set; } // The score to be awarded when this Capoo is merged with another Capoo
     public virtual string capooTag { get; set; } // For identifying other Capoos with the same tag
     public virtual string nextCapooTag { get; set; } // The capoo to be created when this one collides with another
 
@@ -20,6 +25,8 @@ public class CapooBase : MonoBehaviour
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         soundEffectManager = GameObject.FindGameObjectWithTag("SoundEffectManager").GetComponent<SoundEffectManager>();
+        // Start new Capoos at a smaller size
+        transform.localScale = new Vector3(STARTING_SCALE * maxSize, STARTING_SCALE * maxSize, 0);
     }
 
     private void Update()
@@ -27,6 +34,14 @@ public class CapooBase : MonoBehaviour
         // If the merge cooldown is still active, reduce it by the time since the last frame
         if (mergeCooldown > 0) {
             mergeCooldown -= Time.deltaTime;
+        }
+        // If the Capoo is not up to full size, increase its size
+        if (transform.localScale.x < 1 * maxSize) {
+            // Grow at a rate of SCALE_RATE per second
+            growTimer += Time.deltaTime; // deltaTime: seconds since the last frame
+            // Note: Ensure the Capoo doesn't grow larger than the max size
+            float currentScale = Mathf.Min((STARTING_SCALE + growTimer * SCALE_RATE), 1) * maxSize;
+            transform.localScale = new Vector3(currentScale, currentScale, 0);
         }
     }
 

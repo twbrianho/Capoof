@@ -253,7 +253,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7554258069024300380, guid: bed9ee976035e472d9e32d36d3691a15, type: 3}
       propertyPath: m_Mass
-      value: 5.954107
+      value: 4.7044806
       objectReference: {fileID: 0}
     - target: {fileID: 8056070006294633873, guid: bed9ee976035e472d9e32d36d3691a15, type: 3}
       propertyPath: m_Name
@@ -1090,7 +1090,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3983396615912474172, guid: dce1f8db9c8ea42a6a0184587c917fbe, type: 3}
       propertyPath: m_Mass
-      value: 0.778266
+      value: 0.6539597
       objectReference: {fileID: 0}
     - target: {fileID: 3983396615912474174, guid: dce1f8db9c8ea42a6a0184587c917fbe, type: 3}
       propertyPath: m_Name
@@ -1133,7 +1133,7 @@ GameObject:
   - component: {fileID: 693219382}
   - component: {fileID: 693219381}
   - component: {fileID: 693219380}
-  m_Layer: 2
+  m_Layer: 6
   m_Name: Ceiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1574,7 +1574,7 @@ PrefabInstance:
       objectReference: {fileID: 6200000, guid: e84701c5bb36f49d48944e67cee809b2, type: 2}
     - target: {fileID: 7206710966362262764, guid: 2509e107ac11248c18491c11eb304ec8, type: 3}
       propertyPath: m_Mass
-      value: 1.477693
+      value: 1.085652
       objectReference: {fileID: 0}
     - target: {fileID: 7946937360462190197, guid: 2509e107ac11248c18491c11eb304ec8, type: 3}
       propertyPath: m_PlayOnAwake
@@ -1593,7 +1593,7 @@ GameObject:
   - component: {fileID: 864445824}
   - component: {fileID: 864445823}
   - component: {fileID: 864445822}
-  m_Layer: 2
+  m_Layer: 6
   m_Name: FarRightWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2557,7 +2557,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1137446324}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2633,7 +2633,7 @@ GameObject:
   - component: {fileID: 1196912586}
   - component: {fileID: 1196912585}
   - component: {fileID: 1196912584}
-  m_Layer: 2
+  m_Layer: 6
   m_Name: RightWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3312,7 +3312,7 @@ PrefabInstance:
       objectReference: {fileID: 6200000, guid: e84701c5bb36f49d48944e67cee809b2, type: 2}
     - target: {fileID: 4442562331413697841, guid: 6b8402773c4024c19a4eb8dbbbe15ba0, type: 3}
       propertyPath: m_Mass
-      value: 3.0243523
+      value: 2.3155198
       objectReference: {fileID: 0}
     - target: {fileID: 6583399465671313576, guid: 6b8402773c4024c19a4eb8dbbbe15ba0, type: 3}
       propertyPath: m_PlayOnAwake
@@ -3565,7 +3565,7 @@ GameObject:
   - component: {fileID: 1875580073}
   - component: {fileID: 1875580072}
   - component: {fileID: 1875580071}
-  m_Layer: 2
+  m_Layer: 6
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3941,6 +3941,10 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: e84701c5bb36f49d48944e67cee809b2, type: 2}
+    - target: {fileID: 9217583968082838433, guid: ddd568233eb124507a56a4e7ac0185cb, type: 3}
+      propertyPath: m_Mass
+      value: 10.282745
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddd568233eb124507a56a4e7ac0185cb, type: 3}
 --- !u!1 &2088447899
@@ -4112,7 +4116,7 @@ GameObject:
   - component: {fileID: 2123798154}
   - component: {fileID: 2123798153}
   - component: {fileID: 2123798152}
-  m_Layer: 2
+  m_Layer: 6
   m_Name: LeftWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
