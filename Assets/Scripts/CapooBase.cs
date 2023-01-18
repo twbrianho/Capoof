@@ -19,6 +19,10 @@ public class CapooBase : MonoBehaviour
     public virtual string capooTag { get; set; } // For identifying other Capoos with the same tag
     public virtual string nextCapooTag { get; set; } // The capoo to be created when this one collides with another
 
+    private float LevelSizeModifier() 
+    {
+        return (gameManager.level - 1) * 0.05f;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +30,7 @@ public class CapooBase : MonoBehaviour
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         soundEffectManager = GameObject.FindGameObjectWithTag("SoundEffectManager").GetComponent<SoundEffectManager>();
         // Start new Capoos at a smaller size
-        transform.localScale = new Vector3(STARTING_SCALE * maxSize, STARTING_SCALE * maxSize, 0);
+        transform.localScale = new Vector3(STARTING_SCALE * (maxSize + LevelSizeModifier()), STARTING_SCALE * (maxSize + LevelSizeModifier()), 0);
     }
 
     private void Update()
@@ -36,11 +40,11 @@ public class CapooBase : MonoBehaviour
             mergeCooldown -= Time.deltaTime;
         }
         // If the Capoo is not up to full size, increase its size
-        if (transform.localScale.x < 1 * maxSize) {
+        if (transform.localScale.x < 1 * (maxSize + LevelSizeModifier())) {
             // Grow at a rate of SCALE_RATE per second
             growTimer += Time.deltaTime; // deltaTime: seconds since the last frame
             // Note: Ensure the Capoo doesn't grow larger than the max size
-            float currentScale = Mathf.Min((STARTING_SCALE + growTimer * SCALE_RATE), 1) * maxSize;
+            float currentScale = Mathf.Min((STARTING_SCALE + growTimer * SCALE_RATE), 1) * (maxSize + LevelSizeModifier());
             transform.localScale = new Vector3(currentScale, currentScale, 0);
         }
     }
@@ -76,5 +80,9 @@ public class CapooBase : MonoBehaviour
         Destroy(collision.gameObject);
         // Award the player the merge score
         gameManager.AddScore(mergeScore);
+        // If Capoo8s were merged, increase the level
+        if (capooTag == "Capoo8") {
+            gameManager.IncreaseLevel();
+        }
     }
 }

@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public DeathZone deathZone;
     public GameObject gameOverScreen;
     public Text scoreText;
+    public Text levelText;
 
     GameObject Capoo1;
     GameObject Capoo2;
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
     GameObject Capoo7;
     GameObject Capoo8;
 
+    public int level;
     public int score;
     public GameObject currentCapoo;
     private bool gameIsOver;
@@ -35,6 +37,15 @@ public class GameManager : MonoBehaviour
         }
         score += points;
         scoreText.text = score.ToString();
+    }
+
+    public void IncreaseLevel() {
+        if (gameIsOver) {
+            // Don't increase level if game is over
+            return;
+        }
+        level++;
+        levelText.text = "Level " + level.ToString();
     }
 
     private bool IsMouseOverUI() {
@@ -90,11 +101,13 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         // Initialize variables
+        level = 1;
         score = 0;
         respawnCountdown = 0;
 
         soundEffectManager = GameObject.FindGameObjectWithTag("SoundEffectManager").GetComponent<SoundEffectManager>();
         deathZone = GameObject.FindGameObjectWithTag("DeathZone").GetComponent<DeathZone>();
+        levelText.text = "Level " + level.ToString();
         scoreText.text = score.ToString();
 
         Capoo1 = GameObject.FindWithTag("Capoo1");
