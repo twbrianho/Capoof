@@ -30,6 +30,9 @@
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
     <style>
       @font-face { font-family: Inter; src: url('Inter-Regular.ttf'); } 
+      html, body {
+        height: 100%;
+      }
       body {
         text-align: center;
         padding: 0;
@@ -58,12 +61,19 @@
         document.getElementsByTagName('head')[0].appendChild(meta);
 
         var canvas = document.querySelector("#unity-canvas");
-        canvas.style.width = "100%";
-        canvas.style.height = "100%";
-        canvas.style.position = "fixed";
+        const mobileUnfriendlyScreen = document.createElement("div");
+        mobileUnfriendlyScreen.innerHTML = "<div>use your computer I'm begging you</div>";
+        mobileUnfriendlyScreen.style.width = "100%";
+        mobileUnfriendlyScreen.style.height = "100%";
+        mobileUnfriendlyScreen.style.display = "flex";
+        mobileUnfriendlyScreen.style.justifyContent = "center";
+        mobileUnfriendlyScreen.style.alignItems = "center";
+        mobileUnfriendlyScreen.style.color = "white";
+        mobileUnfriendlyScreen.style.backgroundColor = "black";
+
+        canvas.parentNode.replaceChild(mobileUnfriendlyScreen, canvas);
 
         document.body.style.marginTop = "0";
-        document.body.style.textAlign = "left";
       }
 
       createUnityInstance(document.querySelector("#unity-canvas"), {
