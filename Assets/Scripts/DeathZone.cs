@@ -5,7 +5,7 @@ using UnityEngine;
 public class DeathZone : MonoBehaviour
 {
     public float DEATH_DELAY = 5.0f;
-    
+
     public GameManager gameManager;
     public HashSet<GameObject> capoosInside = new HashSet<GameObject>(); // Array of Capoos currently inside the DeathZone
     public float capoosInsideElapsedTime = 0.0f; // Continuous amount of time that there have been Capoos inside the DeathZone
@@ -24,9 +24,11 @@ public class DeathZone : MonoBehaviour
         {
             capoosInsideElapsedTime = 0.0f;
         }
-        else {
+        else
+        {
             capoosInsideElapsedTime += Time.deltaTime;
-            if (capoosInsideElapsedTime >= DEATH_DELAY) {
+            if (capoosInsideElapsedTime >= DEATH_DELAY && !gameManager.gameIsOver)
+            {
                 gameManager.GameOver();
             }
         }

@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class CapooBase : MonoBehaviour
 {
-    private float STARTING_SCALE = 0.0f;
-    private float SCALE_RATE = 2.0f;  // Size increase per second
+    public float STARTING_SCALE = 0.0f;
+    public float SCALE_RATE = 2.0f;  // Size increase per second
+    public float LEVEL_SCALE_MODIFIER = 0.05f; // The amount to increase the max size of a Capoo by per level
 
     public GameManager gameManager;
     public SoundEffectManager soundEffectManager;
-    
+
     public bool isInvolvedInCollision = false; // Ensure each Capoo can be involved in only one collision
     private float mergeCooldown = 0.5f; // The time between when a Capoo is created and when it can be merged with another Capoo
     private float growTimer = 0.0f; // Time elapsed since the Capoo was created
@@ -19,9 +20,9 @@ public class CapooBase : MonoBehaviour
     public virtual string capooTag { get; set; } // For identifying other Capoos with the same tag
     public virtual string nextCapooTag { get; set; } // The capoo to be created when this one collides with another
 
-    private float LevelSizeModifier() 
+    private float LevelSizeModifier()
     {
-        return (gameManager.level - 1) * 0.05f;
+        return (gameManager.level - 1) * LEVEL_SCALE_MODIFIER;
     }
 
     // Start is called before the first frame update
@@ -36,11 +37,13 @@ public class CapooBase : MonoBehaviour
     private void Update()
     {
         // If the merge cooldown is still active, reduce it by the time since the last frame
-        if (mergeCooldown > 0) {
+        if (mergeCooldown > 0)
+        {
             mergeCooldown -= Time.deltaTime;
         }
         // If the Capoo is not up to full size, increase its size
-        if (transform.localScale.x < 1 * (maxSize + LevelSizeModifier())) {
+        if (transform.localScale.x < 1 * (maxSize + LevelSizeModifier()))
+        {
             // Grow at a rate of SCALE_RATE per second
             growTimer += Time.deltaTime; // deltaTime: seconds since the last frame
             // Note: Ensure the Capoo doesn't grow larger than the max size
@@ -53,15 +56,18 @@ public class CapooBase : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // Ignore collisions with non-relevant objects
-        if (collision.gameObject.tag != capooTag) {
+        if (collision.gameObject.tag != capooTag)
+        {
             return;
         }
         // If still in the merge cooldown, don't do anything
-        if (mergeCooldown > 0) {
+        if (mergeCooldown > 0)
+        {
             return;
         }
         // If this Capoo has already been involved in a collision (i.e. the other Capoo is handling the collision), don't do anything
-        if (isInvolvedInCollision || collision.gameObject.GetComponent<CapooBase>().isInvolvedInCollision) {
+        if (isInvolvedInCollision || collision.gameObject.GetComponent<CapooBase>().isInvolvedInCollision)
+        {
             return;
         }
         // Set the collision handler flags
@@ -81,7 +87,8 @@ public class CapooBase : MonoBehaviour
         // Award the player the merge score
         gameManager.AddScore(mergeScore);
         // If Capoo8s were merged, increase the level
-        if (capooTag == "Capoo8") {
+        if (capooTag == "Capoo8")
+        {
             gameManager.IncreaseLevel();
         }
     }
