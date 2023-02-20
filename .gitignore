@@ -73,4 +73,5 @@ crashlytics-build.properties
 
 # Sensitive data
 LootLockerConfig.asset
-Assets/LootLockerSDK/Resources/Config/LootLockerConfig.asset
+LootLockerConfig.asset.meta
+
