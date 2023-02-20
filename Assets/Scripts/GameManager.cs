@@ -137,6 +137,7 @@ public class GameManager : MonoBehaviour
                 Debug.Log("LootLocker SubmitScore Success");
                 submitScoreText.text = "Submitted! :)";
                 scoreSubmitted = true;
+                GetLeaderboard(); // Update leaderboard
             }
             else
             {
