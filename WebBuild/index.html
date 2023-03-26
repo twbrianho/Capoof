@@ -47,9 +47,23 @@
         height: 720px;
         background: lightgray;
       }
+      .floating-btn {
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+        z-index: 100;
+        display: flex;
+        transition-duration: 300ms;
+      }
+      .floating-btn:hover {
+        transform: scale(1.1);
+      }
     </style>
   </head>
   <body>
+    <a class="floating-btn"  href="https://www.youtube.com/watch?v=LegzYJEtzFA&ab_channel=BadLightNovelTitles" target="_blank">
+      <img src="youtube.svg" alt="YouTube Video" height="50px">
+    </a>
     <canvas id="unity-canvas" width=1280 height=720></canvas>
     <script src="Build/WebBuild.loader.js"></script>
     <script>
